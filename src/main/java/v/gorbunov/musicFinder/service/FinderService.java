@@ -10,8 +10,6 @@ public class FinderService {
     public static final  String YA_MUSIC = "https://music.yandex.ru/search?text=";
 
     public String findMusic(String name){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(YA_MUSIC).append(name);
-        return stringBuilder.toString();
+        return YA_MUSIC + name;
     }
 }
