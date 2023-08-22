@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import v.gorbunov.musicFinder.service.FinderService;
 
+import java.io.IOException;
+
 @RestController
 public class FinderController {
 
@@ -14,8 +16,9 @@ public class FinderController {
     private FinderService finderService;
 
     @GetMapping("/find/{name}")
-    public ResponseEntity findMusic(@PathVariable String name) {
+    public ResponseEntity findMusic(@PathVariable String name) throws IOException {
         String music = finderService.findMusic(name);
-        return ResponseEntity.ok(music);
+        var title = finderService.parser(music);
+        return ResponseEntity.ok(title);
     }
 }
