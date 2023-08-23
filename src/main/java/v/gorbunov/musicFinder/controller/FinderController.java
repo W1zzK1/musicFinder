@@ -15,10 +15,17 @@ public class FinderController {
     @Autowired
     private FinderService finderService;
 
-    @GetMapping("/find/{name}")
+    @GetMapping("/findYA/{name}")
     public ResponseEntity findMusic(@PathVariable String name) throws IOException {
-        String music = finderService.findMusic(name);
-        var title = finderService.parser(music);
-        return ResponseEntity.ok(title);
+        String music = finderService.findYAMusic(name);
+        var title = finderService.parserYM(music);
+        System.out.println(title);
+        return ResponseEntity.ok("You was looking for : " + title);
+    }
+
+    @GetMapping("/findVK/{name}")
+    public ResponseEntity findVK(@PathVariable String name) throws IOException{
+        String music = finderService.findVKMusic(name);
+        return ResponseEntity.ok(finderService.parserVK(music));
     }
 }
