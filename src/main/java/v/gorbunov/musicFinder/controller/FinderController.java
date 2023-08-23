@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import v.gorbunov.musicFinder.service.AppleMusicService;
 import v.gorbunov.musicFinder.service.FinderService;
 
 import java.io.IOException;
@@ -14,6 +15,9 @@ public class FinderController {
 
     @Autowired
     private FinderService finderService;
+
+    @Autowired
+    private AppleMusicService appleMusicService;
 
     @GetMapping("/findYA/{name}")
     public ResponseEntity findMusic(@PathVariable String name) throws IOException {
@@ -27,5 +31,11 @@ public class FinderController {
     public ResponseEntity findVK(@PathVariable String name) throws IOException{
         String music = finderService.findVKMusic(name);
         return ResponseEntity.ok(finderService.parserVK(music));
+    }
+
+    @GetMapping("/findApple/{name}")
+    public ResponseEntity findApple(@PathVariable String name) throws IOException{
+        String music = appleMusicService.findAppleMusic(name);
+        return ResponseEntity.ok(appleMusicService.parseAppleMusic(music));
     }
 }

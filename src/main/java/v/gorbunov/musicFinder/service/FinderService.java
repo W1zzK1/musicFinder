@@ -11,13 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+import static v.gorbunov.musicFinder.storage.ConstantsStorage.*;
+
 @Service
 public class FinderService {
-
-    public static final String YA_MUSIC_FIND = "https://music.yandex.ru/search?text=";
-    public static final String YA_MUSIC_HOME = "https://music.yandex.ru";
-    public static final String VK_MUSIC = "https://vk.com/music?q=";
-
     public String findYAMusic(String name) {
         return YA_MUSIC_FIND + name;
     }
@@ -26,14 +23,18 @@ public class FinderService {
         return VK_MUSIC + name;
     }
 
-    public String parserYM(String url) throws IOException {
+    public String parserYM(String url) {
         WebDriver driver = new ChromeDriver();
         driver.get(url);
         String htmlCode = driver.getPageSource();
 
-        Element element = Jsoup.parse(htmlCode).getElementsByClass("d-track__name").first();
-        Element test = element.select("a").first();
-        String trackLink = test.attr("href");
+        Element element = Jsoup.parse(htmlCode).getElementsByClass(YA_MUSIC_DIV_NAME).first();
+        String trackLink = "";
+        try {
+            trackLink = element.select(A).first().attr(HREF);
+        } catch (NullPointerException e){
+            throw new NullPointerException();
+        }
         driver.close();
         return YA_MUSIC_HOME + trackLink;
     }
