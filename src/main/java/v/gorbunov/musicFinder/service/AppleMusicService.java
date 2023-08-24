@@ -5,6 +5,7 @@ import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static v.gorbunov.musicFinder.storage.ConstantsStorage.*;
 
@@ -15,10 +16,15 @@ public class AppleMusicService {
         return APPLE_MUSIC_SEARCH + name;
     }
 
-    public String parseAppleMusic(String url) throws IOException {
-        Element element = Jsoup.connect(url).get().getElementsByClass(APPLE_MUSIC_DIV_NAME).first();;
-
-        String trackLink = element.select(A).first().attr(HREF);
+    public String parseAppleMusic(String url) throws Throwable {
+        Element element = Jsoup.connect(url).get().getElementsByClass(APPLE_MUSIC_DIV_NAME).first();
+        String trackLink = "";
+        try{
+            assert element != null : "Element wasn't found or it was null";
+            trackLink = Objects.requireNonNull(element.select(A).first()).attr(HREF);
+        } catch (NullPointerException e){
+            throw new Throwable("обшибка нахуй, на том кто это писал");
+        }
 
         return trackLink;
     }
