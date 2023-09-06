@@ -8,11 +8,9 @@ public class ConstantsStorage {
     public static final String A = "a";
     public static final String HREF = "href";
     public static final String VK_MUSIC = "https://vk.com/music?q=";
-    public static final String SPOTIFY_MUSIC_ACCESS_TOKEN = "taHZ2SdB-bPA3FsK3D7ZN5npZS47cMy-IEySVEGttOhXmqaVAIo0ESvTCLjLBifhHOHOIuhFUKPW1WMDP7w6dj3MAZdWT8CLI2MkZaXbYLTeoDvXesf2eeiLYPBGdx8tIwQJKgV8XdnzH_DONk";
-    public static final String SPOTIFY_SEARCH_API_LINK = "https://api.spotify.com/v1/search?q=";
+    public static final String SPOTIFY_TOKEN_LINK = "https://accounts.spotify.com/api/token";
     public static final String SPOTIFY_CLIENT_ID = "9773ce61f50f4c0c999c09553b45b5f6";
-    public static final String SPOTIFY_ACCESS_TOKEN = "BQDGP2qWydLU5VPXr2VfWcaCuZiSwbIp_hOT4lQqhNE0bJcBwkXoslfsnfIAtWejsRZb101GiHfDdve1kPbUFrQYJHa2XYn-z3vG1FlrVmntASkeT_M";
-    public static final String SPOTIFY_CLIENT_SECRET = "9e8c62d4b498594cd89d361714a";
+    public static final String SPOTIFY_CLIENT_SECRET = "667349e8c62d4b498594cd89d361714a";
     public static final String APPLE_MUSIC_SEARCH = "https://music.apple.com/ru/search?term=";
     public static final String APPLE_MUSIC_DIV_NAME = "top-search-lockup__action svelte-ldozvk";
     public static final String GENIUS_SEARCH_LINK = "https://genius.com/search?q=";
