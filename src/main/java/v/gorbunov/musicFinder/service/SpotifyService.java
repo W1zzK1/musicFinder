@@ -1,12 +1,9 @@
 package v.gorbunov.musicFinder.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import se.michaelthelin.spotify.SpotifyApi;
-import v.gorbunov.musicFinder.dto.SpotifyTrack;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -19,8 +16,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -81,25 +76,6 @@ public class SpotifyService {
         if (m.find()){
             trackName = URLEncoder.encode(trackName, StandardCharsets.UTF_8);
         }
-
-//        URL urlObj = new URL("https://api.spotify.com/v1/search?q=" + trackName.replace(" ", "+") + "&type=track");
-//        HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
-//        connection.setRequestMethod("GET");
-////        connection.setRequestProperty("q", trackName);
-////        connection.setRequestProperty("type", "track");
-//        connection.setRequestProperty("Authorization", "Bearer " + getAccessToken());
-//
-//        int responseCode = connection.getResponseCode();
-//        StringBuilder sb = new StringBuilder();
-//
-//        if (responseCode == HttpURLConnection.HTTP_OK){
-//            Scanner scanner = new Scanner(connection.getInputStream());
-//            while (scanner.hasNext()){
-//                sb.append(scanner.nextLine());
-//            }
-//        } else {
-//            log.info("response code - " + responseCode);
-//        }
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()

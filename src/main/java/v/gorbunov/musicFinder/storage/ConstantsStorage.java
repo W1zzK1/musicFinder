@@ -13,5 +13,7 @@ public class ConstantsStorage {
     public static final String SPOTIFY_CLIENT_SECRET = "667349e8c62d4b498594cd89d361714a";
     public static final String APPLE_MUSIC_SEARCH = "https://music.apple.com/ru/search?term=";
     public static final String APPLE_MUSIC_DIV_NAME = "top-search-lockup__action svelte-ldozvk";
-    public static final String GENIUS_SEARCH_LINK = "https://genius.com/search?q=";
+    public static final String GENIUS_SEARCH_LINK = "https://api.genius.com/search?q=";
+    public static final String GENIUS_API_LINK = "https://api.genius.com";
+    public static final String GENIUS_API_TOKEN = "fxT2wwBtZhQo67A1xDenQ2BMJciNSjciSgU28QHoPKIxsSZEGPRbKBXqciyMAiuX";
 }

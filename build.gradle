@@ -21,6 +21,7 @@ repositories {
 	mavenCentral()
 	maven { url 'https://repo.spring.io/milestone' }
 	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -31,6 +32,7 @@ dependencies {
 	implementation 'se.michaelthelin.spotify:spotify-web-api-java:8.0.0'
 	implementation 'org.json:json:20230227'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.7.1'
+	implementation 'com.github.LowLevelSubmarine:GeniusLyricsAPI:1.0.3'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
