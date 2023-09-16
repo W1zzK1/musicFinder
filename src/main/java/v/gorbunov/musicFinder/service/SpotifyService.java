@@ -110,6 +110,13 @@ public class SpotifyService {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        return response.body();
+        JSONObject jsonObject = new JSONObject(response.body());
+        String link = jsonObject.getJSONObject("tracks")
+                .getJSONArray("items")
+                .getJSONObject(0)
+                .getJSONObject("external_urls")
+                .getString("spotify");
+
+        return link;
     }
 }
