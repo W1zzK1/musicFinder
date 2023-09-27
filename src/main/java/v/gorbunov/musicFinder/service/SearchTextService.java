@@ -2,7 +2,6 @@ package v.gorbunov.musicFinder.service;
 
 import core.GLA;
 import genius.LyricsParser;
-import genius.SongSearch;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -41,7 +40,7 @@ public class SearchTextService {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < s.length(); i++) {
-            if (Character.isDigit(s.charAt(i))){
+            if (Character.isDigit(s.charAt(i))) {
                 sb.append(s.charAt(i));
             }
         }
@@ -50,7 +49,6 @@ public class SearchTextService {
     }
 
     public String getTrackLyrics(String trackName) throws IOException, InterruptedException {
-//        SongSearch songId = gla.search(trackName);
 
         LyricsParser lyricsParser = new LyricsParser(gla);
 

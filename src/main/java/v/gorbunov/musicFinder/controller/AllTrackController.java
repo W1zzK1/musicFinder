@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import v.gorbunov.musicFinder.dto.TrackDto;
 import v.gorbunov.musicFinder.service.AppleMusicService;
 import v.gorbunov.musicFinder.service.SearchTextService;
 import v.gorbunov.musicFinder.service.SpotifyService;
@@ -26,7 +27,7 @@ public class AllTrackController {
 
     @GetMapping("/findAll/{name}")
     public ResponseEntity findMusic(@PathVariable String name) throws Throwable {
-        List<String> allTracks= new ArrayList<>();
+        List<TrackDto> allTracks= new ArrayList<>();
         allTracks.add(appleMusicService.parseAppleMusic(appleMusicService.findAppleMusic(name)));
         allTracks.add(yandexMusicService.parserYM(yandexMusicService.findYAMusic(name)));
         allTracks.add(spotifyService.getTrackByName(name));

@@ -3,6 +3,7 @@ package v.gorbunov.musicFinder.service;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
+import v.gorbunov.musicFinder.dto.TrackDto;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -16,7 +17,7 @@ public class AppleMusicService {
         return APPLE_MUSIC_SEARCH + name;
     }
 
-    public String parseAppleMusic(String url) throws Throwable {
+    public TrackDto parseAppleMusic(String url) throws Throwable {
         Element element = Jsoup.connect(url).get().getElementsByClass(APPLE_MUSIC_DIV_NAME).first();
         String trackLink = "";
         try{
@@ -26,7 +27,7 @@ public class AppleMusicService {
             throw new Throwable("обшибка нахуй, на том кто это писал");
         }
 
-        return trackLink;
+        return new TrackDto("Apple Music", trackLink);
     }
 
 }

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import se.michaelthelin.spotify.SpotifyApi;
+import v.gorbunov.musicFinder.dto.TrackDto;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -68,7 +69,7 @@ public class SpotifyService {
         return json.getString("access_token");
     }
 
-    public String getTrackByName(String trackName) throws Exception {
+    public TrackDto getTrackByName(String trackName) throws Exception {
         String regex = "[а-яёА-ЯЁ]+";
 
         Pattern pattern = Pattern.compile(regex);
@@ -88,10 +89,12 @@ public class SpotifyService {
 
         JSONObject jsonObject = new JSONObject(response.body());
 
-        return jsonObject.getJSONObject("tracks")
+        String trackLink = jsonObject.getJSONObject("tracks")
                 .getJSONArray("items")
                 .getJSONObject(0)
                 .getJSONObject("external_urls")
                 .getString("spotify");
+
+        return new TrackDto("Spotify", trackLink);
     }
 }
