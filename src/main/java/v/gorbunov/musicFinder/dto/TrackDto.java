@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TrackDto {
-    private String providerName;
+    private String providerCode;
     private String trackUrl;
 }
