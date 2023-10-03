@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import se.michaelthelin.spotify.SpotifyApi;
 import v.gorbunov.musicFinder.dto.TrackDto;
+import v.gorbunov.musicFinder.dto.enums.ProviderEnum;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -95,6 +96,6 @@ public class SpotifyService {
                 .getJSONObject("external_urls")
                 .getString("spotify");
 
-        return new TrackDto("Spotify", trackLink);
+        return new TrackDto(ProviderEnum.SPOTIFY, trackLink);
     }
 }

@@ -4,8 +4,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Service;
 import v.gorbunov.musicFinder.dto.TrackDto;
+import v.gorbunov.musicFinder.dto.enums.ProviderEnum;
 
 import java.util.Objects;
 
@@ -19,6 +21,10 @@ public class YandexMusicService {
 
 
     public TrackDto parserYM(String url) {
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("headless");
+
         WebDriver driver = new ChromeDriver();
         driver.get(url);
         String htmlCode = driver.getPageSource();
@@ -32,7 +38,7 @@ public class YandexMusicService {
             throw new NullPointerException();
         }
         driver.close();
-        return new TrackDto("Yandex Music", YA_MUSIC_HOME + trackLink);
+        return new TrackDto(ProviderEnum.YA_MUSIC, YA_MUSIC_HOME + trackLink);
     }
 
 }

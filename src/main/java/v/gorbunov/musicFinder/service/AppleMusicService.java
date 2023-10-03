@@ -4,6 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 import v.gorbunov.musicFinder.dto.TrackDto;
+import v.gorbunov.musicFinder.dto.enums.ProviderEnum;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -27,7 +28,7 @@ public class AppleMusicService {
             throw new Throwable("обшибка нахуй, на том кто это писал");
         }
 
-        return new TrackDto("Apple Music", trackLink);
+        return new TrackDto(ProviderEnum.APPLE_MUSIC, trackLink);
     }
 
 }
