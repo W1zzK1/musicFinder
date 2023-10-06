@@ -15,6 +15,6 @@ public class AppleMusicController {
     @GetMapping("/findApple/{name}")
     public ResponseEntity findApple(@PathVariable String name) throws Throwable {
         String music = appleMusicService.findAppleMusic(name);
-        return ResponseEntity.ok(appleMusicService.parseAppleMusic(music));
+        return ResponseEntity.ok(appleMusicService.findPhotoLink(music));
     }
 }
