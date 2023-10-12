@@ -16,15 +16,20 @@ import static v.gorbunov.musicFinder.storage.ConstantsStorage.*;
 @Service
 public class AppleMusicService {
 
-    public String findAppleMusic(String name) {
+    private String findAppleMusic(String name) {
         return APPLE_MUSIC_SEARCH + name;
     }
 
-    public TrackDto parseAppleMusic(String url) throws Throwable {
-        Element element = Jsoup.connect(url).get().getElementsByClass(APPLE_MUSIC_DIV_NAME).first();
+    private Element findFirstElementByClass(String url, String elementClass) throws IOException {
+        return Jsoup.connect(url).get().getElementsByClass(elementClass).first();
+    }
+
+    public TrackDto parseAppleMusic(String name) throws Throwable {
+        String url = findAppleMusic(name);
+        Element element = findFirstElementByClass(url, APPLE_MUSIC_DIV_NAME);
         String trackLink = "";
         try{
-            assert element != null : "Element wasn't found or it was null";
+//            assert element != null : "Element wasn't found or it was null";
             trackLink = Objects.requireNonNull(element.select(A).first()).attr(HREF);
         } catch (NullPointerException e){
             throw new Throwable("обшибка нахуй, на том кто это писал");
@@ -33,8 +38,9 @@ public class AppleMusicService {
         return new TrackDto(ProviderEnum.APPLE_MUSIC, trackLink);
     }
 
-    public TrackDto findPhotoLink(String url) throws Throwable{
-        Element element = Jsoup.connect(url).get().getElementsByClass(APPLE_MUSIC_PHOTO_CLASS_NAME).first();
+    public TrackDto findPhotoLink(String name) throws Throwable{
+        String url = findAppleMusic(name);
+        Element element = findFirstElementByClass(url, APPLE_MUSIC_PHOTO_CLASS_NAME);
         String photoLink = "";
         try{
             assert element != null : "Element wasn't found or it was null";

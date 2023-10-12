@@ -28,9 +28,10 @@ public class AllTrackController {
     @GetMapping("/findAll/{name}")
     public ResponseEntity findMusic(@PathVariable String name) throws Throwable {
         List<TrackDto> allTracks= new ArrayList<>();
-        allTracks.add(appleMusicService.parseAppleMusic(appleMusicService.findAppleMusic(name)));
-        allTracks.add(yandexMusicService.parserYM(yandexMusicService.findYAMusic(name)));
+        allTracks.add(appleMusicService.parseAppleMusic(name));
+        allTracks.add(yandexMusicService.parserYM(name));
         allTracks.add(spotifyService.getTrackByName(name));
+        allTracks.add(appleMusicService.findPhotoLink(name));
 //        allTracks.add(searchTextService.getTrackLyrics(name));
         return ResponseEntity.ok(allTracks);
     }

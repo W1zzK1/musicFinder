@@ -18,8 +18,7 @@ public class YandexMusicController {
 
     @GetMapping("/findYA/{name}")
     public ResponseEntity findMusic(@PathVariable String name){
-        String music = yandexMusicService.findYAMusic(name);
-        var title = yandexMusicService.parserYM(music);
+        var title = yandexMusicService.parserYM(name);
         System.out.println(title);
         return ResponseEntity.ok("You was looking for : " + title);
     }

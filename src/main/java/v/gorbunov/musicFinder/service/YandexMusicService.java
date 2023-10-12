@@ -15,12 +15,13 @@ import static v.gorbunov.musicFinder.storage.ConstantsStorage.*;
 
 @Service
 public class YandexMusicService {
-    public String findYAMusic(String name) {
+    private String findYAMusic(String name) {
         return YA_MUSIC_FIND + name;
     }
 
 
-    public TrackDto parserYM(String url) {
+    public TrackDto parserYM(String name) {
+        String url = findYAMusic(name);
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("headless");
