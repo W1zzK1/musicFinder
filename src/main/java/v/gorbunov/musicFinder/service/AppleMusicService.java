@@ -26,11 +26,11 @@ public class AppleMusicService {
 
     public TrackDto parseAppleMusic(String name) throws Throwable {
         String url = findAppleMusic(name);
-        Element element = findFirstElementByClass(url, APPLE_MUSIC_DIV_NAME);
+        Element element = findFirstElementByClass(url, APPLE_MUSIC_CLASS_NAME);
         String trackLink = "";
         try{
 //            assert element != null : "Element wasn't found or it was null";
-            trackLink = Objects.requireNonNull(element.select(A).first()).attr(HREF);
+            trackLink = Objects.requireNonNull(element).attr(HREF);
         } catch (NullPointerException e){
             throw new Throwable("обшибка нахуй, на том кто это писал");
         }

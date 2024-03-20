@@ -17,9 +17,9 @@ public class YandexMusicController {
     private YandexMusicService yandexMusicService;
 
     @GetMapping("/findYA/{name}")
-    public ResponseEntity findMusic(@PathVariable String name){
+    public ResponseEntity findMusic(@PathVariable String name) throws InterruptedException {
         var title = yandexMusicService.parserYM(name);
         System.out.println(title);
-        return ResponseEntity.ok("You was looking for : " + title);
+        return ResponseEntity.ok("You was looking for : " + title.getTrackUrl());
     }
 }
