@@ -7,8 +7,12 @@ import v.gorbunov.musicFinder.dto.enums.ProviderEnum;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class TrackDto {
     private ProviderEnum providerCode;
     private String trackUrl;
+
+    public TrackDto(ProviderEnum providerCode, String trackUrl) {
+        this.providerCode = providerCode;
+        this.trackUrl = trackUrl;
+    }
 }

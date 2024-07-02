@@ -1,9 +1,12 @@
 package v.gorbunov.musicFinder.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import v.gorbunov.musicFinder.dto.TrackDto;
 import v.gorbunov.musicFinder.dto.enums.ProviderEnum;
@@ -13,6 +16,7 @@ import java.util.Objects;
 
 import static v.gorbunov.musicFinder.storage.ConstantsStorage.*;
 
+@Slf4j
 @Service
 public class AppleMusicService {
 
@@ -30,9 +34,11 @@ public class AppleMusicService {
         String trackLink = "";
         try{
 //            assert element != null : "Element wasn't found or it was null";
-            trackLink = Objects.requireNonNull(element).attr(HREF);
+            Element aElement = element.select(A).first();
+            trackLink = aElement.attr(HREF);
         } catch (NullPointerException e){
-            throw new Throwable("обшибка нахуй, на том кто это писал");
+            //throw new Throwable("обшибка нахуй, на том кто это писал");
+            throw new Throwable("F*cking mistake, on the one who wrote this.");
         }
 
         return new TrackDto(ProviderEnum.APPLE_MUSIC, trackLink);

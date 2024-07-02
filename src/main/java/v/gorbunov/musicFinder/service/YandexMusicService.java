@@ -8,14 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Service;
 import v.gorbunov.musicFinder.dto.TrackDto;
 import v.gorbunov.musicFinder.dto.enums.ProviderEnum;
-
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import static v.gorbunov.musicFinder.storage.ConstantsStorage.*;
 
@@ -26,8 +21,8 @@ public class YandexMusicService {
         return YA_MUSIC_FIND + name;
     }
 
-    private void pressX(WebDriver driver){
-        WebElement clickable = driver.findElement(By.className(YA_MUSIC_KREST_NAME));
+    private void pressX(WebDriver driver) {
+        WebElement clickable = driver.findElement(By.xpath(YA_MUSIC_KREST_NAME));
         clickable.click();
     }
 
@@ -37,20 +32,28 @@ public class YandexMusicService {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("headless");
 
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver(options);
         driver.get(url);
+
+//        WebDriverWait webDriverWait = new WebDriverWait(driver, );
+
+        pressX(driver);
 
         String htmlCode = driver.getPageSource();
 
         Element element = Jsoup.parse(htmlCode).getElementsByClass(YA_MUSIC_DIV_NAME).first();
         String trackLink = "";
-        try {
-            assert element != null : "Element wasn't found or it was null";
-            trackLink = Objects.requireNonNull(element.select(A).first()).attr(HREF);
-        } catch (NullPointerException e){
-            throw new NullPointerException();
+        if (element != null) {
+            Element aElement = element.select(A).first();
+            if (aElement != null) {
+                trackLink = aElement.attr(HREF);
+            } else {
+                throw new RuntimeException("Failed to find the link");
+            }
+        } else {
+            throw new RuntimeException("Element wasn't found or it was null");
         }
-        driver.close();
+        driver.quit();
         return new TrackDto(ProviderEnum.YA_MUSIC, YA_MUSIC_HOME + trackLink);
     }
 
